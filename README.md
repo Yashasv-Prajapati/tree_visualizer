@@ -1,4 +1,4 @@
-# Tree Visualizer
+# Tree Visualizer - DSA + DEV
 
 ## Features
 1. Visualize Tree Data Structure in a beautiful way.
@@ -31,6 +31,7 @@
  - Error Page Styling for Error
  - Not Found Page Styling for invalid routes
 2. Feature requests.
+3. Add images of interface in the README.md file.
 
 ## Getting Started
 
