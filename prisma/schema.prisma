@@ -1,0 +1,81 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Band {
+  id      String @id @default(cuid())
+  from    Int
+  to      Int
+  spacing Int
+  name    String
+}
+
+model Frequency {
+  value     Int      @id
+  userId    String
+  email     String
+  latitude  Float
+  longitude Float
+  createdAt DateTime @default(now())
+
+  @@index([userId])
+}
+
+model FrequencyLocation {
+  id        String   @id @default(cuid())
+  value     Int
+  userId    String
+  email     String
+  latitude  Float
+  longitude Float
+  createdAt DateTime @default(now())
+
+  @@index([value])
+  @@index([latitude, longitude])
+}
+
+model TreeNode {
+  id           String     @id @default(nanoid())
+  creatorEmail String
+  name         String
+  root         Boolean
+  parentId     String?
+  parent       TreeNode?  @relation("ParentChild", fields: [parentId], references: [id])
+  children     TreeNode[] @relation("ParentChild")
+  logs         Logs[]
+
+  @@index([parentId])
+}
+
+model RootNode {
+  id           String @id @default(nanoid())
+  creatorEmail String
+  name         String
+}
+
+model Logs {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  nodeId    String?
+  message   String
+  type      String
+  node      TreeNode? @relation(fields: [nodeId], references: [id])
+  
+  @@index([createdAt])
+  @@index([type])
+}
+
+model User {
+  id       String @id @default(cuid())
+  email    String
+  password String
+  rank     Int
+}
