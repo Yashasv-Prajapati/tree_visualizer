@@ -1,4 +1,4 @@
-# Tree Visualizer - DSA + DEV
+# Tree Visualizer
 
 ## Features
 1. Visualize Tree Data Structure in a beautiful way.
